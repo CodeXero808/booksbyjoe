@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Golden Odyssey - A Luxurious Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #c9a66b;
+            --secondary-color: #1a1a1a;
+            --text-color: #333;
+            --background-color: #f9f5f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 1s ease-out forwards;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .book-showcase {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 4rem 0;
+        }
+
+        .book-image {
+            flex: 1;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: fadeInLeft 1s ease-out 0.5s forwards;
+        }
+
+        .book-image img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .book-image img:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .book-info {
+            flex: 1;
+            padding-left: 2rem;
+            opacity: 0;
+            transform: translateX(20px);
+            animation: fadeInRight 1s ease-out 0.5s forwards;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #b08d59;
+            transform: translateY(-3px);
+        }
+
+        .reviews {
+            margin-top: 4rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        .review-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+
+        .review {
+            flex: 1;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 0 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .review:hover {
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-bio {
+            display: flex;
+            align-items: center;
+            margin: 4rem 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+        }
+
+        .author-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .author-image img {
+            max-width: 300px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .author-info {
+            flex: 2;
+            padding-left: 2rem;
+        }
+
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .synopsis {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .synopsis-content {
+            max-height: 200px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .synopsis-content.expanded {
+            max-height: 2000px;
+        }
+        .read-more-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            background-color: #b08d59;
+            transform: translateY(-3px);
+        }
+
+        .read-more-btn:focus {
+            outline: 2px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+        .newsletter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 4rem -2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2.5s forwards;
+        }
+
+        .newsletter h2 {
+            color: white;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .newsletter-form input[type="email"] {
+            padding: 0.8rem;
+            width: 300px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .newsletter-form button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #333;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        .contact-form {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .contact-form.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #b08d59;
+            transform: translateY(-3px);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>A BIGINER'S GUIDE</h1>
+            <H2>TO DIGITAL MARKETING</H2>
+        </header>
+
+        <main>
+            <section class="book-showcase">
+                <div class="book-image">
+                    <img src="Images/Mockup.png" alt="The Golden Odyssey Book Cover" id="book-cover">
+                </div>
+                <div class="book-info">
+                    <h2>Embark on an Epic Adventure</h2>
+                    <p>Are you ready to step into the world of digital marketing but don’t know where to start? This e-book is your ultimate beginner’s guide to navigating the exciting and ever-evolving digital landscape. Packed with simple explanations and actionable strategies, it covers everything you need to know—from creating engaging content and mastering social media to understanding SEO, email marketing, and more. No jargon, just clear steps to help you build a strong foundation in online marketing.</p>
+                    <p>Whether you're starting a side hustle, launching your first business, or simply curious about marketing, this e-book will give you the confidence and tools to succeed. Learn how to grow your audience, boost your brand, and turn clicks into customers. The path to digital success starts here—let this guide lead the way!</p>
+                    <script src="https://www.paypal.com/sdk/js?client-id=BAAy-GsoaWpZtvye3x4pwceaFyIbodQWS9B5e29nJC993-8kBq6b0QRkO44zwKn-3rWljIf8rYHzk1htcM&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+                    <div id="paypal-container-8HJMBAJKZNSXW"></div>
+                    <script>
+                      paypal.HostedButtons({
+                        hostedButtonId: "8HJMBAJKZNSXW",
+                      }).render("#paypal-container-8HJMBAJKZNSXW")
+                    </script>
+                </div>
+            </section>
+
+            <section class="author-bio">
+                <div class="author-image">
+                    <img src="Images/Hardcover Books Mockup Front And Back View.png" alt="Alexandra Blackwood">
+                </div>
+                <div class="author-info">
+                    <h2>About the Author</h2>
+                    <p>The author is a passionate digital marketing expert with years of hands-on experience helping businesses and individuals thrive in the online world. With a deep understanding of social media, SEO, email marketing, and content creation, the author has guided countless beginners to unlock their potential and turn their ideas into thriving digital ventures.</p>
+                    <p>Driven by the desire to make digital marketing simple and accessible for everyone, the author uses practical insights, real-world examples, and step-by-step instructions to empower readers. Whether you're a small business owner, aspiring entrepreneur, or someone curious about digital marketing, this guide is written with you in mind—because success starts with the right knowledge.</p>
+                </div>
+            </section>
+
+            <div class="container">
+                <h1>PREVIEW OF THE BOOK</h1>
+                <div class="synopsis">
+                    <div class="synopsis-content" id="synopsisContent">
+                        <h1>Chapter 1: The Digital Revolution</h1>
+
+                           <p> Discover how the internet reshaped commerce, communication, and culture. Understand why digital marketing has become the lifeblood of modern businesses and how this field offers endless opportunities for growth, creativity, and revenue generation.</p>
+                            
+                           <h2>Key Highlights:</h2> 
+                            
+                            <ul>
+                                <li>The history and evolution of digital marketing.</li>
+                                <li>Why traditional marketing alone is no longer sufficient.</li>
+                                <li>The limitless potential of online reach and engagement.</li>
+                            </ul>
+                        <h1>Chapter 2: Foundations of Digital Marketing</h1>
+                        <p>Learn the essential components of digital marketing—from search engine optimization (SEO) and social media marketing to email campaigns and pay-per-click (PPC) advertising. Master the terminology and core concepts that every digital marketer must know.</p>
+                        <h2>Key Highlights:</h2>
+                            <ul>
+                                <li>Digital marketing vs. traditional marketing: A comparative analysis.</li>
+                                <li>Core tools and platforms for beginning</li>
+                                <li> Understanding the customer journey.</li>
+                            </ul>
+        
+                        <h1>Chapter 3: Crafting Your Strategy</h1>
+                        <p>Craft a comprehensive digital marketing strategy that outlines your goals, resources, and target audience. This chapter will help you identify your unique value proposition, develop a clear brand voice, and tailor your marketing efforts to meet your business's objectives.</p>
+                        <h2>Key Highlights:</h2>
+                            <ul>
+                                <li>Defining your brand identity.</li>
+                                <li>Understanding your target audience.</li>
+                                <li>Developing buyer personas to understand your audience.</li>
+                                 <li>Developing a marketing plan.</li>
+                            </ul>
+                    </div>
+                    <button class="read-more-btn" id="readMoreBtn" aria-expanded="false" aria-controls="synopsisContent">
+                        Read More
+                    </button>
+                </div>
+            </div>
+            </section>
+
+            <section>
+                <div class="contactus"><h1>CONTACT US</h1></div>
+                <form
+  action="https://formspree.io/f/xeoeaaqp"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 BooksKE. All rights reserved.</p>
+    </footer>
+
+    <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookCover = document.getElementById('book-cover');
+            
+            // Parallax effect on scroll
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                bookCover.style.transform = `translateY(${scrollPosition * 0.1}px)`;
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Newsletter form submission (prevent default for demo)
+            const newsletterForm = document.querySelector('.newsletter-form');
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for subscribing!');
+                newsletterForm.reset();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const synopsisContent = document.getElementById('synopsisContent');
+            const readMoreBtn = document.getElementById('readMoreBtn');
+
+            readMoreBtn.addEventListener('click', () => {
+                synopsisContent.classList.toggle('expanded');
+                const isExpanded = synopsisContent.classList.contains('expanded');
+                readMoreBtn.textContent = isExpanded ? 'Read Less' : 'Read More';
+                readMoreBtn.setAttribute('aria-expanded', isExpanded);
+            });
+        });
+
+         /* paste this line in verbatim */
+  window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+  /* customize formbutton below*/     
+  formbutton("create", {
+    action: "https://formspree.io/f/xeoeaaqp",
+    title: "How can we help?",
+    fields: [
+      { 
+        type: "email", 
+        label: "Email:", 
+        name: "email",
+        required: true,
+        placeholder: "your@email.com"
+      },
+      {
+        type: "textarea",
+        label: "Message:",
+        name: "message",
+        placeholder: "What's on your mind?",
+      },
+      { type: "submit" }      
+    ],
+    styles: {
+      title: {
+        backgroundColor: "gray"
+      },
+      button: {
+        backgroundColor: "gray"
+      }
+    }
+  });
+    </script>
+</body>
+</html>
